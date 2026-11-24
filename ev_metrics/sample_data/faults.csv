@@ -1,0 +1,3 @@
+scenario,fault_type,city,start,end
+crash,node_crash,2,2026-11-03 10:00:00,2026-11-03 12:00:00
+partition,network_partition,,2026-11-03 10:00:00,2026-11-03 12:00:00

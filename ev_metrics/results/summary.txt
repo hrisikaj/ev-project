@@ -1,0 +1,17 @@
+EV Charging Port Management - evaluation summary
+input: /home/budayaku/ev_metrics/sample_data/outcomes.csv
+
+ scenario  method  requests acceptance_rate  overflow_requests   OAR   SRR  fault_requests    AuF  lost_in_crash  D  authority_viol correctness
+   normal  static      7838           86.3%               1820 40.9% 13.7%               0    n/a              0  0               0        PASS
+   normal dynamic      7838           94.9%               1431 72.8%  0.2%               0    n/a              0  0               0        PASS
+    crash  static      7838           85.6%               1827 40.8% 14.4%             406  64.3%             63  0               0        PASS
+    crash dynamic      7838           94.9%               1548 75.2%  0.3%             406 100.0%             63  0               0        PASS
+partition  static      7838           86.2%               1790 39.6% 13.8%             406  88.7%              0  0               0        PASS
+partition dynamic      7838           94.9%               1559 75.5%  0.3%             406  99.5%              0  0               0        PASS
+
+Takeaways
+  OAR: Normal run: dynamic escrow absorbed 72.8% of overflow requests vs 40.9% for static (+31.9 points), because borrowed rights reach cities a single redirect cannot.
+  SRR: Normal run: static escrow turned away 13.7% of all drivers while a port was free somewhere, dynamic escrow 0.2% (13.5 points less wasted capacity).
+  AuF: During the node crash, dynamic escrow served 100.0% of requests vs 64.3% for static (+35.7 points). During the network partition: 99.5% vs 88.7% (+10.8 points).
+
+Correctness: PASS - no double bookings and at most one booking city per port in every run.
